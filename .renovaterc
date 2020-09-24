@@ -1,0 +1,42 @@
+{
+  "extends": [
+    "config:base",
+    "docker:enableMajor",
+    ":disableRateLimiting",
+    ":automergePr",
+    ":automergeRequireAllStatusChecks",
+    ":semanticCommits",
+    ":maintainLockFilesWeekly"
+  ],
+  "baseBranches": ["master"],
+  "labels": ["renovate"],
+  "major": {
+    "labels": ["major", "renovate"]
+  },
+  "minor": {
+    "labels": ["minor", "renovate"]
+  },
+  "patch": {
+    "labels": ["patch", "renovate"]
+  },
+  "pin": {
+    "labels": ["pin", "renovate"]
+  },
+  "pinDigests": false,
+  "recreateClosed": "true",
+  "packageRules": [
+    {
+      "updateTypes": ["patch", "pin", "digest"],
+      "automerge": true
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sENV .*?_VERSION=(?<currentValue>.*)\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ]
+}
