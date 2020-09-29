@@ -23,7 +23,7 @@ FROM docker:19.03.13 AS base
 # renovate: datasource=pypi depName=awscli
 ENV AWSCLI_VERSION=1.18.144
 # renovate: datasource=pypi depName=yamllint
-ENV YAMLLINT_VERSION=1.24.2
+ENV YAMLLINT_VERSION=1.25.0
 RUN apk add --update-cache --no-cache \
         git \
         curl \
