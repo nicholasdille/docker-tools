@@ -64,7 +64,7 @@ RUN curl --silent --location --fail https://github.com/deislabs/oras/releases/do
 
 FROM base AS kustomize
 # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize versioning=regex:^kustomize\/v(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$
-ENV KUSTOMIZE_VERSION=kustomize/v3.8.4
+ENV KUSTOMIZE_VERSION=kustomize/v3.8.5
 RUN bash -c 'curl --silent --location https://github.com/kubernetes-sigs/kustomize/releases/download/${KUSTOMIZE_VERSION/\//%2F}/kustomize_${KUSTOMIZE_VERSION#kustomize/}_linux_amd64.tar.gz | \
         tar -xvzC /usr/local/bin kustomize'
 
