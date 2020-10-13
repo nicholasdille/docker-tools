@@ -52,7 +52,7 @@ RUN curl --silent --location "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd
 
 FROM base AS trivy
 # renovate: datasource=github-releases depName=aquasecurity/trivy
-ENV TRIVY_VERSION=v0.11.0
+ENV TRIVY_VERSION=v0.12.0
 RUN curl --silent --location --fail https://github.com/aquasecurity/trivy/releases/download/${TRIVY_VERSION}/trivy_${TRIVY_VERSION:1}_Linux-64bit.tar.gz | \
         tar -xvzC /usr/local/bin/ trivy
 
