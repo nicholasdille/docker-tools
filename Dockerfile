@@ -46,7 +46,7 @@ RUN curl --silent https://storage.googleapis.com/kubernetes-release/release/stab
 
 FROM base AS helm
 # renovate: datasource=github-releases depName=helm/helm
-ENV HELM_VERSION=v3.4.0
+ENV HELM_VERSION=v3.4.1
 RUN curl --silent --location "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | \
         tar -xvzC /usr/local/bin/ --strip-components=1 linux-amd64/helm
 
