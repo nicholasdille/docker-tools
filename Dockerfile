@@ -93,8 +93,10 @@ RUN curl --location --fail --remote-name https://github.com/mayflower/docker-ls/
 FROM base AS ksort
 # renovate: datasource=github-releases depName=superbrothers/ksort
 ENV KSORT_VERSION=v0.4.0
-RUN curl --location --fail https://github.com/superbrothers/ksort/releases/download/${KSORT_VERSION}/ksort-linux-amd64.tar.gz | \
-        tar -xzC /usr/local/bin/ ksort
+WORKDIR /tmp
+RUN curl --location --fail --remote-name https://github.com/superbrothers/ksort/releases/download/${KSORT_VERSION}/ksort-linux-amd64.zip \
+ && unzip -d /usr/local/bin/ ksort-linux-amd64.zip ksort \
+ && rm ksort-linux-amd64.zip
 
 FROM base AS kube-score
 # renovate: datasource=github-releases depName=zegl/kube-score
