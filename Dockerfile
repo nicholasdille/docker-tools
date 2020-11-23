@@ -1,4 +1,4 @@
-FROM golang:1.15-alpine AS flarectl
+FROM golang:1.15-alpine@sha256:207da5bae545f35f3fe1f4a9b50bfe2bfcc91d0d96f11adeb3ccb40d6b82ed46 AS flarectl
 # renovate: datasource=github-releases depName=cloudflare/cloudflare-go
 ENV FLARECTL_VERSION=v0.13.5
 RUN apk add --update-cache --no-cache \
@@ -10,7 +10,7 @@ RUN apk add --update-cache --no-cache \
  && go build -v .  \
  && mv flarectl /
 
-FROM golang:1.15-alpine AS yaml-patch
+FROM golang:1.15-alpine@sha256:207da5bae545f35f3fe1f4a9b50bfe2bfcc91d0d96f11adeb3ccb40d6b82ed46 AS yaml-patch
 RUN apk add --update-cache --no-cache \
         git \
  && go get -u github.com/krishicks/yaml-patch \
@@ -19,7 +19,7 @@ RUN apk add --update-cache --no-cache \
  && go build . \
  && mv yaml-patch /
 
-FROM docker:19.03.13 AS base
+FROM docker:19.03.13@sha256:279beeb5de99e09af79f13e85e20194ce68db4255e8b2d955e408be69d082b5a AS base
 # renovate: datasource=pypi depName=awscli
 ENV AWSCLI_VERSION=1.18.176
 # renovate: datasource=pypi depName=yamllint
