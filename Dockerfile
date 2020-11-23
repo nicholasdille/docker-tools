@@ -92,7 +92,7 @@ RUN curl --location --fail --remote-name https://github.com/mayflower/docker-ls/
 
 FROM base AS ksort
 # renovate: datasource=github-releases depName=superbrothers/ksort
-ENV KSORT_VERSION=v0.4.0
+ENV KSORT_VERSION=v0.4.1
 WORKDIR /tmp
 RUN curl --location --fail --remote-name https://github.com/superbrothers/ksort/releases/download/${KSORT_VERSION}/ksort-linux-amd64.zip \
  && unzip -d /usr/local/bin/ ksort-linux-amd64.zip ksort \
