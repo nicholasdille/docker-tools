@@ -1,6 +1,6 @@
 FROM golang:1.15-alpine AS flarectl
 # renovate: datasource=github-releases depName=cloudflare/cloudflare-go
-ENV FLARECTL_VERSION=v0.13.2
+ENV FLARECTL_VERSION=v0.13.5
 RUN apk add --update-cache --no-cache \
         git \
  && go get -d github.com/cloudflare/cloudflare-go \
@@ -21,9 +21,9 @@ RUN apk add --update-cache --no-cache \
 
 FROM docker:19.03.13 AS base
 # renovate: datasource=pypi depName=awscli
-ENV AWSCLI_VERSION=1.18.144
+ENV AWSCLI_VERSION=1.18.176
 # renovate: datasource=pypi depName=yamllint
-ENV YAMLLINT_VERSION=1.24.2
+ENV YAMLLINT_VERSION=1.25.0
 RUN apk add --update-cache --no-cache \
         git \
         curl \
@@ -46,13 +46,13 @@ RUN curl --silent https://storage.googleapis.com/kubernetes-release/release/stab
 
 FROM base AS helm
 # renovate: datasource=github-releases depName=helm/helm
-ENV HELM_VERSION=v3.3.4
+ENV HELM_VERSION=v3.4.1
 RUN curl --silent --location "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | \
         tar -xvzC /usr/local/bin/ --strip-components=1 linux-amd64/helm
 
 FROM base AS trivy
 # renovate: datasource=github-releases depName=aquasecurity/trivy
-ENV TRIVY_VERSION=v0.11.0
+ENV TRIVY_VERSION=v0.12.0
 RUN curl --silent --location --fail https://github.com/aquasecurity/trivy/releases/download/${TRIVY_VERSION}/trivy_${TRIVY_VERSION:1}_Linux-64bit.tar.gz | \
         tar -xvzC /usr/local/bin/ trivy
 
@@ -64,13 +64,13 @@ RUN curl --silent --location --fail https://github.com/deislabs/oras/releases/do
 
 FROM base AS kustomize
 # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize versioning=regex:^kustomize\/v(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$
-ENV KUSTOMIZE_VERSION=kustomize/v3.8.4
+ENV KUSTOMIZE_VERSION=kustomize/v3.8.7
 RUN bash -c 'curl --silent --location https://github.com/kubernetes-sigs/kustomize/releases/download/${KUSTOMIZE_VERSION/\//%2F}/kustomize_${KUSTOMIZE_VERSION#kustomize/}_linux_amd64.tar.gz | \
         tar -xvzC /usr/local/bin kustomize'
 
 FROM base AS yq
 # renovate: datasource=github-releases depName=mikefarah/yq
-ENV YQ_VERSION=3.4.0
+ENV YQ_VERSION=3.4.1
 RUN curl --silent --location --fail --output /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 \
  && chmod +x /usr/local/bin/yq
 
@@ -100,7 +100,7 @@ RUN curl --location --fail --remote-name https://github.com/superbrothers/ksort/
 
 FROM base AS kube-score
 # renovate: datasource=github-releases depName=zegl/kube-score
-ENV KUBE_SCORE_VERSION=v1.8.1
+ENV KUBE_SCORE_VERSION=v1.10.0
 RUN curl --location --fail https://github.com/zegl/kube-score/releases/download/${KUBE_SCORE_VERSION}/kube-score_${KUBE_SCORE_VERSION:1}_linux_amd64.tar.gz | \
         tar -xzC /usr/local/bin/
 
