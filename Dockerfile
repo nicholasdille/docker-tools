@@ -21,7 +21,7 @@ RUN apk add --update-cache --no-cache \
 
 FROM docker:19.03.14@sha256:27187852516862e6cc580bad3e27eb8fb965550eb30a859d645ed8bdde0fe2c5 AS base
 # renovate: datasource=pypi depName=awscli
-ENV AWSCLI_VERSION=1.18.207
+ENV AWSCLI_VERSION=1.18.208
 # renovate: datasource=pypi depName=yamllint
 ENV YAMLLINT_VERSION=1.25.0
 RUN apk add --update-cache --no-cache \
