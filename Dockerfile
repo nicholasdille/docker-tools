@@ -1,4 +1,4 @@
-FROM golang:1.15-alpine@sha256:380503d71db14d717c8f4174552ed1996956e8de61f7806e5d9bcaa4c6651101 AS flarectl
+FROM golang:1.15-alpine@sha256:6ca52e384c2ec84aa63337f4cf71e04ec3c6ea7333f5a89052b4238d0b53b22b AS flarectl
 # renovate: datasource=github-releases depName=cloudflare/cloudflare-go
 ENV FLARECTL_VERSION=v0.13.7
 RUN apk add --update-cache --no-cache \
@@ -10,7 +10,7 @@ RUN apk add --update-cache --no-cache \
  && go build -v .  \
  && mv flarectl /
 
-FROM golang:1.15-alpine@sha256:380503d71db14d717c8f4174552ed1996956e8de61f7806e5d9bcaa4c6651101 AS yaml-patch
+FROM golang:1.15-alpine@sha256:6ca52e384c2ec84aa63337f4cf71e04ec3c6ea7333f5a89052b4238d0b53b22b AS yaml-patch
 RUN apk add --update-cache --no-cache \
         git \
  && go get -u github.com/krishicks/yaml-patch \
