@@ -100,7 +100,7 @@ RUN curl --location --fail --remote-name https://github.com/superbrothers/ksort/
 
 FROM base AS kube-score
 # renovate: datasource=github-releases depName=zegl/kube-score
-ENV KUBE_SCORE_VERSION=v1.10.0
+ENV KUBE_SCORE_VERSION=v1.10.1
 RUN curl --location --fail https://github.com/zegl/kube-score/releases/download/${KUBE_SCORE_VERSION}/kube-score_${KUBE_SCORE_VERSION:1}_linux_amd64.tar.gz | \
         tar -xzC /usr/local/bin/
 
