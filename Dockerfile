@@ -1,6 +1,6 @@
 FROM golang:1.15-alpine@sha256:07ec52ea1063aa6ca02034af5805aaae77d3d4144cced4e95f09d62a6d8ddf0a AS flarectl
 # renovate: datasource=github-releases depName=cloudflare/cloudflare-go
-ENV FLARECTL_VERSION=v0.13.7
+ENV FLARECTL_VERSION=v0.13.8
 RUN apk add --update-cache --no-cache \
         git \
  && go get -d github.com/cloudflare/cloudflare-go \
