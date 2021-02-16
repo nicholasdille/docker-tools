@@ -85,7 +85,7 @@ RUN curl --silent --verbose https://bintray.com/jfrog/jfrog-cli-go/jfrog-cli-lin
 
 FROM base AS docker-ls
 # renovate: datasource=github-releases depName=mayflower/docker-ls
-ENV DOCKER_LS_VERSION=v0.3.2
+ENV DOCKER_LS_VERSION=v0.5.1
 RUN curl --location --fail --remote-name https://github.com/mayflower/docker-ls/releases/download/${DOCKER_LS_VERSION}/docker-ls-linux-amd64.zip \
  && unzip docker-ls-linux-amd64.zip \
  && mv docker-ls docker-rm /usr/local/bin/
