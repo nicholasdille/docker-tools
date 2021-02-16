@@ -58,7 +58,7 @@ RUN curl --silent --location --fail https://github.com/aquasecurity/trivy/releas
 
 FROM base AS oras
 # renovate: datasource=github-releases depName=deislabs/oras
-ENV ORAS_VERSION=v0.8.1
+ENV ORAS_VERSION=v0.10.0
 RUN curl --silent --location --fail https://github.com/deislabs/oras/releases/download/${ORAS_VERSION}/oras_${ORAS_VERSION:1}_linux_amd64.tar.gz | \
         tar -xvzC /usr/local/bin oras
 
