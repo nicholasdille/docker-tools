@@ -70,7 +70,7 @@ RUN bash -c 'curl --silent --location https://github.com/kubernetes-sigs/kustomi
 
 FROM base AS yq
 # renovate: datasource=github-releases depName=mikefarah/yq
-ENV YQ_VERSION=v4.5.1
+ENV YQ_VERSION=v4.6.0
 RUN curl --silent --location --fail --output /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 \
  && chmod +x /usr/local/bin/yq
 
