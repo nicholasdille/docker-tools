@@ -19,7 +19,7 @@ RUN apk add --update-cache --no-cache \
  && go build . \
  && mv yaml-patch /
 
-FROM docker:20.10.4@sha256:4ff25d503770237fb3cc3ed2893ef0336c8a7fb6e9d5eb5b8dbe06e2986335ab AS base
+FROM docker:20.10.5@sha256:4d0ee1ecb0fb9a3523e08dd694db6e02d23ebe14f4f0d4618eedae7724a78ac0 AS base
 # renovate: datasource=pypi depName=awscli
 ENV AWSCLI_VERSION=1.19.19
 # renovate: datasource=pypi depName=yamllint
