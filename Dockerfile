@@ -3,11 +3,12 @@ FROM golang:1.16-alpine@sha256:39a5f1284ccbb22cc2695a73d196d5d833383c1f073f520ab
 ENV FLARECTL_VERSION=v0.13.8
 RUN apk add --update-cache --no-cache \
         git \
- && go get -d github.com/cloudflare/cloudflare-go \
+ && git clone https://github.com/cloudflare/cloudflare-go $GOPATH/src/github.com/cloudflare/cloudflare-go \
  && cd $GOPATH/src/github.com/cloudflare/cloudflare-go \
  && git checkout ${FLARECTL_VERSION} \
+ && go get github.com/cloudflare/cloudflare-go \
  && cd cmd/flarectl \
- && go build -v .  \
+ && go build -v . \
  && mv flarectl /
 
 FROM golang:1.16-alpine@sha256:39a5f1284ccbb22cc2695a73d196d5d833383c1f073f520ab6c9360da84fc782 AS yaml-patch
