@@ -13,11 +13,8 @@ RUN apk add --update-cache --no-cache \
 FROM golang:1.16-alpine@sha256:39a5f1284ccbb22cc2695a73d196d5d833383c1f073f520ab6c9360da84fc782 AS yaml-patch
 RUN apk add --update-cache --no-cache \
         git \
- && go get -u github.com/krishicks/yaml-patch \
- && cd /go/src/github.com/krishicks/yaml-patch/cmd/yaml-patch \
- && go get . \
- && go build . \
- && mv yaml-patch /
+ && go get github.com/krishicks/yaml-patch/cmd/yaml-patch \
+ && mv /go/bin/yaml-patch /
 
 FROM docker:20.10.5@sha256:4d0ee1ecb0fb9a3523e08dd694db6e02d23ebe14f4f0d4618eedae7724a78ac0 AS base
 # renovate: datasource=pypi depName=awscli
