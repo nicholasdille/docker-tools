@@ -1,23 +1,21 @@
-FROM golang:1.15-alpine@sha256:5dac2ccec6538afc96a37e630d1a408f5b40097e3e9d275af1207175bbfd3d1b AS flarectl
+FROM golang:1.16-alpine@sha256:39a5f1284ccbb22cc2695a73d196d5d833383c1f073f520ab6c9360da84fc782 AS flarectl
 # renovate: datasource=github-releases depName=cloudflare/cloudflare-go
 ENV FLARECTL_VERSION=v0.14.0
 RUN apk add --update-cache --no-cache \
         git \
- && go get -d github.com/cloudflare/cloudflare-go \
+ && git clone https://github.com/cloudflare/cloudflare-go $GOPATH/src/github.com/cloudflare/cloudflare-go \
  && cd $GOPATH/src/github.com/cloudflare/cloudflare-go \
  && git checkout ${FLARECTL_VERSION} \
+ && go get github.com/cloudflare/cloudflare-go \
  && cd cmd/flarectl \
- && go build -v .  \
+ && go build -v . \
  && mv flarectl /
 
-FROM golang:1.15-alpine@sha256:5dac2ccec6538afc96a37e630d1a408f5b40097e3e9d275af1207175bbfd3d1b AS yaml-patch
+FROM golang:1.16-alpine@sha256:39a5f1284ccbb22cc2695a73d196d5d833383c1f073f520ab6c9360da84fc782 AS yaml-patch
 RUN apk add --update-cache --no-cache \
         git \
- && go get -u github.com/krishicks/yaml-patch \
- && cd /go/src/github.com/krishicks/yaml-patch/cmd/yaml-patch \
- && go get . \
- && go build . \
- && mv yaml-patch /
+ && go get github.com/krishicks/yaml-patch/cmd/yaml-patch \
+ && mv /go/bin/yaml-patch /
 
 FROM docker:20.10.5@sha256:4d0ee1ecb0fb9a3523e08dd694db6e02d23ebe14f4f0d4618eedae7724a78ac0 AS base
 # renovate: datasource=pypi depName=awscli
