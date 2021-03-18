@@ -38,7 +38,8 @@
         "jfrog/jfrog-cli",
         "mayflower/docker-ls",
         "superbrothers/ksort",
-        "zegl/kube-score"
+        "zegl/kube-score",
+        "profclems/glab"
       ],
       "extractVersion": "^v(?<version>.+)$"
     },

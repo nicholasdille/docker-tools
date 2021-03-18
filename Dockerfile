@@ -134,6 +134,12 @@ RUN curl -sLfO https://github.com/kubermatic/kubeone/releases/download/${KUBEONE
  && mv kubeone /usr/local/bin/ \
  && rm kubeone_${KUBEONE_VERSION#v}_linux_amd64.zip
 
+FROM base AS glab
+# renovate: datasource=github-releases depName=profclems/glab
+ENV GLAB_VERSION=1.16.0
+RUN curl -sL https://github.com/profclems/glab/releases/download/v${GLAB_VERSION}/glab_${GLAB_VERSION}_Linux_x86_64.tar.gz | \
+        tar -xzC /usr/local
+
 FROM base AS final
 COPY --from=flarectl /usr/local/bin/flarectl /usr/local/bin/
 COPY --from=yaml-patch /usr/local/bin/yaml-patch /usr/local/bin/
