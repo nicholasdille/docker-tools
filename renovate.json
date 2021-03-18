@@ -1,4 +1,5 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
     "docker:enableMajor",
@@ -25,13 +26,32 @@
     {
       "updateTypes": ["patch", "pin", "digest"],
       "automerge": true
+    },
+    {
+      "packageNames": [
+        "docker/cli",
+        "cloudflare/cloudflare-go",
+        "kubernetes/kubernetes",
+        "helm/helm",
+        "aquasecurity/trivy",
+        "deislabs/oras",
+        "jfrog/jfrog-cli",
+        "mayflower/docker-ls",
+        "superbrothers/ksort",
+        "zegl/kube-score"
+      ],
+      "extractVersion": "^v(?<version>.+)$"
+    },
+    {
+      "packageNames": [ "kubernetes-sigs/kustomize" ],
+      "extractVersion": "^kustomize/v(?<version>.+)$"
     }
   ],
   "regexManagers": [
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": [
-        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sENV .*?_VERSION=(?<currentValue>.*)\\s"
+        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s(ENV|ARG) .*?_VERSION=(?<currentValue>.*)\\s"
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
