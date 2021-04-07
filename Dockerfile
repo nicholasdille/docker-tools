@@ -121,7 +121,7 @@ RUN curl --location --output /usr/local/bin/semver https://github.com/fsaintjacq
 
 FROM base AS terraform
 # renovate: datasource=github-tags depName=hashicorp/terraform
-ARG TERRAFORM_VERSION=v0.14.9
+ARG TERRAFORM_VERSION=v0.14.10
 RUN curl -sLfO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION#v}/terraform_${TERRAFORM_VERSION#v}_linux_amd64.zip \
  && unzip terraform_${TERRAFORM_VERSION#v}_linux_amd64.zip -d /usr/local/bin/ \
  && rm terraform_${TERRAFORM_VERSION#v}_linux_amd64.zip
