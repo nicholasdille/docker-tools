@@ -128,7 +128,7 @@ RUN curl -sLfO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION#v}/t
 
 FROM base AS kubeone
 # renovate: datasource=github-releases depName=kubermatic/kubeone
-ARG KUBEONE_VERSION=v1.2.1
+ARG KUBEONE_VERSION=v1.2.2
 RUN curl -sLfO https://github.com/kubermatic/kubeone/releases/download/${KUBEONE_VERSION}/kubeone_${KUBEONE_VERSION#v}_linux_amd64.zip \
  && unzip kubeone_${KUBEONE_VERSION#v}_linux_amd64.zip \
  && mv kubeone /usr/local/bin/ \
