@@ -29,7 +29,7 @@ RUN curl --location "https://github.com/cloudflare/cloudflare-go/releases/downlo
         tar -xJC /usr/local/bin/ flarectl \
  && flarectl --version
 
-FROM golang:1.15-alpine@sha256:4f947058456c270d2641cdafaa178f2661122343b60dd6136c9fbb0ee99f3906 AS yaml-patch
+FROM golang:1.15-alpine@sha256:7188e9913e306673128b6b9872fe0b39e09cb73c2397c56bcb600b36bf042531 AS yaml-patch
 RUN apk add --update-cache --no-cache \
         git \
  && go get -u github.com/krishicks/yaml-patch \
