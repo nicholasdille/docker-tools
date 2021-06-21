@@ -1,15 +1,18 @@
-name: tools
+name: build
 
 on:
   push:
     branches:
-    - master
-  schedule:
-  - cron:  '0 7 * * *'
+      - 'master'
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - 'master'
 
 jobs:
   build:
-    name: tools
+    name: build
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -36,4 +39,4 @@ jobs:
         tags: nicholasdille/tools:latest
         cache-from: type=registry,ref=nicholasdille/tools:latest
         cache-to: type=inline
-        push: true
+        push: ${{ github.event_name != 'pull_request' }}
