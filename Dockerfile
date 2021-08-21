@@ -4,7 +4,7 @@ FROM docker:${DOCKER_VERSION} AS base
 # renovate: datasource=pypi depName=awscli
 ARG AWSCLI_VERSION=1.19.112
 # renovate: datasource=pypi depName=yamllint
-ARG YAMLLINT_VERSION=1.26.2
+ARG YAMLLINT_VERSION=1.26.3
 RUN apk add --update-cache --no-cache \
         git \
         curl \
