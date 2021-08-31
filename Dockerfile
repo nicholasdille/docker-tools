@@ -55,7 +55,7 @@ RUN curl --location "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.g
 
 FROM base AS trivy
 # renovate: datasource=github-releases depName=aquasecurity/trivy
-ARG TRIVY_VERSION=0.18.3
+ARG TRIVY_VERSION=0.19.2
 RUN curl --location --fail https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz | \
         tar -xzC /usr/local/bin/ trivy \
  && trivy --version
