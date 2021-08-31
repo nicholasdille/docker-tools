@@ -83,7 +83,7 @@ RUN curl --location --output /usr/local/bin/yq https://github.com/mikefarah/yq/r
 
 FROM base AS jfrog
 # renovate: datasource=github-releases depName=jfrog/jfrog-cli
-ARG JFROG_VERSION=1.49.0
+ARG JFROG_VERSION=2.3.0
 RUN curl --location --output /usr/local/bin/jfrog "https://releases.jfrog.io/artifactory/jfrog-cli/v1/${JFROG_VERSION}/jfrog-cli-linux-amd64/jfrog" \
  && chmod +x /usr/local/bin/jfrog \
  && jfrog --version
