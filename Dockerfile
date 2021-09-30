@@ -2,7 +2,7 @@
 ARG DOCKER_VERSION=20.10.8
 FROM docker:${DOCKER_VERSION} AS base
 # renovate: datasource=pypi depName=awscli
-ARG AWSCLI_VERSION=1.20.51
+ARG AWSCLI_VERSION=1.20.52
 # renovate: datasource=pypi depName=yamllint
 ARG YAMLLINT_VERSION=1.26.3
 RUN apk add --update-cache --no-cache \
