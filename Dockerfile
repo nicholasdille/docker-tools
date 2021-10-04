@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags depName=docker/cli
-ARG DOCKER_VERSION=20.10.8
+ARG DOCKER_VERSION=20.10.9
 FROM docker:${DOCKER_VERSION} AS base
 # renovate: datasource=pypi depName=awscli
 ARG AWSCLI_VERSION=1.20.54
