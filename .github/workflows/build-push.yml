@@ -32,11 +32,16 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
+    #- name: Build and push
+    #  id: docker_build
+    #  uses: docker/build-push-action@a66e35b9cbcf4ad0ea91ffcaf7bbad63ad9e0229 # renovate: tag=v2
+    #  with:
+    #    tags: nicholasdille/tools:latest
+    #    cache-from: type=registry,ref=nicholasdille/tools:latest
+    #    cache-to: type=inline
+    #    push: ${{ github.event_name != 'pull_request' }}
+
     - name: Build and push
-      id: docker_build
-      uses: docker/build-push-action@a66e35b9cbcf4ad0ea91ffcaf7bbad63ad9e0229 # renovate: tag=v2
+      uses: docker/bake-action@master
       with:
-        tags: nicholasdille/tools:latest
-        cache-from: type=registry,ref=nicholasdille/tools:latest
-        cache-to: type=inline
-        push: ${{ github.event_name != 'pull_request' }}
+        push: true
