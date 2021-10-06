@@ -46,6 +46,10 @@
     {
       "packageNames": [ "kubernetes-sigs/kustomize" ],
       "extractVersion": "^kustomize/v(?<version>.+)$"
+    },
+    {
+      "packageNames": [ "nicholasdille/tools" ],
+      "pinDigests": false
     }
   ],
   "regexManagers": [
