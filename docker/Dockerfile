@@ -6,4 +6,4 @@ RUN curl --location https://download.docker.com/linux/static/stable/x86_64/docke
  && docker --version
 
 FROM scratch
-COPY --from=docker-ls /usr/local/bin/* /usr/local/bin/
+COPY --from=docker /usr/local/bin/* /usr/local/bin/
