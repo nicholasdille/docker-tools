@@ -4,8 +4,6 @@ variable "repository" {
 
 group "default" {
     targets = [
-        "trivy",
-        "oras",
         "docker-ls",
         "glab",
         "helm",
@@ -15,7 +13,9 @@ group "default" {
         "kubectl",
         "kubeone",
         "kustomize",
+        "oras",
         "terraform",
+        "trivy",
         "yaml-patch",
         "yq"
     ]
@@ -39,20 +39,6 @@ target "helpers" {
     context = "@helpers"
     tags = [ "${repository}:helpers" ]
     cache-from = [ "${repository}:helpers" ]
-}
-
-target "trivy" {
-    inherits = [ "presets" ]
-    context = "trivy"
-    tags = [ "${repository}:trivy" ]
-    cache-from = [ "${repository}:trivy" ]
-}
-
-target "oras" {
-    inherits = [ "presets" ]
-    context = "oras"
-    tags = [ "${repository}:oras" ]
-    cache-from = [ "${repository}:oras" ]
 }
 
 target "docker-ls" {
@@ -125,11 +111,25 @@ target "kustomize" {
     cache-from = [ "${repository}:kustomize" ]
 }
 
+target "oras" {
+    inherits = [ "presets" ]
+    context = "oras"
+    tags = [ "${repository}:oras" ]
+    cache-from = [ "${repository}:oras" ]
+}
+
 target "terraform" {
     inherits = [ "presets" ]
     context = "terraform"
     tags = [ "${repository}:terraform" ]
     cache-from = [ "${repository}:terraform" ]
+}
+
+target "trivy" {
+    inherits = [ "presets" ]
+    context = "trivy"
+    tags = [ "${repository}:trivy" ]
+    cache-from = [ "${repository}:trivy" ]
 }
 
 target "yaml-patch" {
