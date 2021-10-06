@@ -42,3 +42,9 @@ jobs:
       uses: docker/bake-action@master
       with:
         push: ${{ github.event_name != 'pull_request' }}
+
+    - name: Build final image
+      uses: docker/bake-action@master
+      with:
+        targets: example
+        push: ${{ github.event_name != 'pull_request' }}
