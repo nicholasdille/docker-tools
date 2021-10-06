@@ -41,12 +41,13 @@ jobs:
     #    cache-to: type=inline
     #    push: ${{ github.event_name != 'pull_request' }}
 
-    - name: Build and push
+    - name: Build helpers image
       uses: docker/bake-action@master
       with:
         targets: helpers
+        push: true
 
-    - name: Build and push
+    - name: Build tools
       uses: docker/bake-action@master
       with:
         push: true

@@ -1,4 +1,4 @@
-FROM helpers AS terraform
+FROM nicholasdille/tools:helpers AS terraform
 # renovate: datasource=github-tags depName=hashicorp/terraform
 ARG TERRAFORM_VERSION=v1.0.8
 RUN curl -sLfO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION#v}/terraform_${TERRAFORM_VERSION#v}_linux_amd64.zip \

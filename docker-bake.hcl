@@ -30,15 +30,15 @@ target "example" {
 }
 
 target "presets" {
-    #pull = true
+    pull = true
     cache-to = [ "type=inline" ]
 }
 
 target "helpers" {
     inherits = [ "presets" ]
     context = "@helpers"
-    tags = [ "helpers" ]
-    cache-from = [ "helpers" ]
+    tags = [ "${repository}:helpers" ]
+    cache-from = [ "${repository}:helpers" ]
 }
 
 target "trivy" {

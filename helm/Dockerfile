@@ -1,4 +1,4 @@
-FROM helpers AS helm
+FROM nicholasdille/tools:helpers AS helm
 # renovate: datasource=github-releases depName=helm/helm
 ARG HELM_VERSION=3.7.0
 RUN curl --location "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" | \

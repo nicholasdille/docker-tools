@@ -1,4 +1,4 @@
-FROM helpers AS ksort
+FROM nicholasdille/tools:helpers AS ksort
 # renovate: datasource=github-releases depName=superbrothers/ksort
 ARG KSORT_VERSION=0.4.2
 WORKDIR /tmp
