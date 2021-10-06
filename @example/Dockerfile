@@ -1,6 +1,4 @@
 FROM alpine:3.14.2
-
-FROM base AS final
 RUN apk add --update-cache --no-cache \
         git \
         curl \
