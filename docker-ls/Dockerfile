@@ -1,4 +1,4 @@
-FROM nicholasdille/tools:helpers AS docker-ls
+FROM nicholasdille/tools:helpers@sha256:43a00bf5aa5ecb25d6c25ea80758842a9eba7dd0535546556ff73975bb154420 AS docker-ls
 # renovate: datasource=github-releases depName=mayflower/docker-ls
 ARG DOCKER_LS_VERSION=0.5.1
 RUN curl --location --remote-name https://github.com/mayflower/docker-ls/releases/download/v${DOCKER_LS_VERSION}/docker-ls-linux-amd64.zip \
