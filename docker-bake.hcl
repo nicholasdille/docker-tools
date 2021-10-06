@@ -4,6 +4,7 @@ variable "repository" {
 
 group "default" {
     targets = [
+        "docker",
         "docker-ls",
         "glab",
         "helm",
@@ -46,6 +47,13 @@ target "docker-ls" {
     context = "docker-ls"
     tags = [ "${repository}:docker-ls" ]
     cache-from = [ "${repository}:docker-ls" ]
+}
+
+target "docker" {
+    inherits = [ "presets" ]
+    context = "docker"
+    tags = [ "${repository}:docker" ]
+    cache-from = [ "${repository}:docker" ]
 }
 
 target "flarectl" {
