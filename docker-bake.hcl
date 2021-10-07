@@ -5,8 +5,12 @@ variable "repository" {
 group "default" {
     targets = [
         "docker",
+        "docker-compose",
         "docker-ls",
+        "docker-machine",
         "glab",
+        "go",
+        "gradle",
         "helm",
         "jfrog",
         "ksort",
@@ -14,7 +18,10 @@ group "default" {
         "kubectl",
         "kubeone",
         "kustomize",
+        "maven",
+        "node",
         "oras",
+        "sops",
         "terraform",
         "trivy",
         "yaml-patch",
@@ -42,6 +49,20 @@ target "helpers" {
     cache-from = [ "${repository}:helpers" ]
 }
 
+target "docker" {
+    inherits = [ "presets" ]
+    context = "docker"
+    tags = [ "${repository}:docker" ]
+    cache-from = [ "${repository}:docker" ]
+}
+
+target "docker-compose" {
+    inherits = [ "presets" ]
+    context = "docker-compose"
+    tags = [ "${repository}:docker-compose" ]
+    cache-from = [ "${repository}:docker-compose" ]
+}
+
 target "docker-ls" {
     inherits = [ "presets" ]
     context = "docker-ls"
@@ -49,11 +70,11 @@ target "docker-ls" {
     cache-from = [ "${repository}:docker-ls" ]
 }
 
-target "docker" {
+target "docker-machine" {
     inherits = [ "presets" ]
-    context = "docker"
-    tags = [ "${repository}:docker" ]
-    cache-from = [ "${repository}:docker" ]
+    context = "docker-machine"
+    tags = [ "${repository}:docker-machine" ]
+    cache-from = [ "${repository}:docker-machine" ]
 }
 
 target "flarectl" {
@@ -63,11 +84,25 @@ target "flarectl" {
     cache-from = [ "${repository}:flarectl" ]
 }
 
+target "go" {
+    inherits = [ "presets" ]
+    context = "go"
+    tags = [ "${repository}:go" ]
+    cache-from = [ "${repository}:go" ]
+}
+
 target "glab" {
     inherits = [ "presets" ]
     context = "glab"
     tags = [ "${repository}:glab" ]
     cache-from = [ "${repository}:glab" ]
+}
+
+target "gradle" {
+    inherits = [ "presets" ]
+    context = "glab"
+    tags = [ "${repository}:gradle" ]
+    cache-from = [ "${repository}:gradle" ]
 }
 
 target "helm" {
@@ -119,11 +154,32 @@ target "kustomize" {
     cache-from = [ "${repository}:kustomize" ]
 }
 
+target "maven" {
+    inherits = [ "presets" ]
+    context = "maven"
+    tags = [ "${repository}:maven" ]
+    cache-from = [ "${repository}:maven" ]
+}
+
+target "node" {
+    inherits = [ "presets" ]
+    context = "node"
+    tags = [ "${repository}:node" ]
+    cache-from = [ "${repository}:node" ]
+}
+
 target "oras" {
     inherits = [ "presets" ]
     context = "oras"
     tags = [ "${repository}:oras" ]
     cache-from = [ "${repository}:oras" ]
+}
+
+target "sops" {
+    inherits = [ "presets" ]
+    context = "sops"
+    tags = [ "${repository}:sops" ]
+    cache-from = [ "${repository}:sops" ]
 }
 
 target "terraform" {
