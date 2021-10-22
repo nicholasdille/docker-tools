@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for DIR in $(find . -type f -name Dockerfile | cut -d/ -f2); do
+for DIR in $(find . -type f -name Dockerfile | cut -d/ -f2 | grep -v "^@"); do
     echo "### Found ${DIR}"
     cat >>jobs.yml <<EOF
 ${DIR}:
