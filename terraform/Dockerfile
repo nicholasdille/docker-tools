@@ -8,7 +8,8 @@ RUN curl -sLfO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION#v}/t
 FROM scratch AS base
 COPY --from=helper /usr/local/bin/* /usr/local/bin/
 
-FROM base AS test
+FROM ubuntu:21.04 AS test
+COPY --from=helper /usr/local/bin/* /usr/local/bin/
 RUN ["terraform", "version"]
 
 FROM base

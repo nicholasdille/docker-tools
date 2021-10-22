@@ -7,7 +7,8 @@ RUN curl --silent https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz | 
 FROM scratch AS base
 COPY --from=helper /opt/go /opt/go
 
-FROM base AS test
-RUN ["go", "version"]
+FROM ubuntu:21.04 AS test
+COPY --from=helper /opt/go /opt/go
+RUN ["/opt/go/bin/go", "version"]
 
 FROM base

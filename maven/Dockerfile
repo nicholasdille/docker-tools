@@ -12,6 +12,6 @@ FROM alpine:3.14.2 AS test
 RUN apk add --update-cache --no-cache \
         openjdk11-jre-headless
 COPY --from=helper /opt/maven /opt/maven
-RUN ["mvn", "--version"]
+RUN ["/opt/maven/bin/mvn", "--version"]
 
 FROM base

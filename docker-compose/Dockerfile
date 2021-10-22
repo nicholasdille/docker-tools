@@ -7,7 +7,8 @@ RUN curl --silent --location --output /usr/local/bin/docker-compose https://gith
 FROM scratch AS base
 COPY --from=helper /usr/local/bin/* /usr/local/bin/
 
-FROM base AS test
+FROM ubuntu:21.04 AS test
+COPY --from=helper /usr/local/bin/* /usr/local/bin/
 RUN ["docker-compose", "--version"]
 
 FROM base
