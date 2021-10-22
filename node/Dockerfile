@@ -1,4 +1,4 @@
-FROM nicholasdille/tools:helpers AS node
+FROM nicholasdille/tools:helpers AS helper
 ENV NVM_DIR=/opt/nvm
 RUN mkdir -p ${NVM_DIR} \
  && curl --silent --location --fail https://api.github.com/repos/nvm-sh/nvm/releases/latest | \
@@ -11,5 +11,10 @@ RUN mkdir -p ${NVM_DIR} \
  && nvm deactivate \
  && nvm uninstall --lts
 
-FROM scratch
-COPY --from=node /opt/node /opt/node
+FROM scratch AS base
+COPY --from=helper /opt/node /opt/node
+
+FROM base AS test
+RUN ["node", "--version"]
+
+FROM base
