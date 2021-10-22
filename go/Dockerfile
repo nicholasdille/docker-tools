@@ -8,6 +8,6 @@ FROM scratch AS base
 COPY --from=helper /opt/go /opt/go
 
 FROM base AS test
-RUN ["go", "--version"]
+RUN ["go", "version"]
 
 FROM base

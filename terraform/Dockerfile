@@ -9,6 +9,6 @@ FROM scratch AS base
 COPY --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
-RUN ["terraform", "--version"]
+RUN ["terraform", "version"]
 
 FROM base

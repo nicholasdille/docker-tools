@@ -8,6 +8,6 @@ FROM scratch AS base
 COPY --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
-RUN ["docker-compose", "version"]
+RUN ["docker-compose", "--version"]
 
 FROM base

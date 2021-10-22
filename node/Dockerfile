@@ -7,14 +7,15 @@ RUN mkdir -p ${NVM_DIR} \
  && . ${NVM_DIR}/nvm.sh \
  && nvm install --lts \
  && NODE_VERSION=$(nvm current) \
- && cp -r /opt/nvm/versions/node/${NODE_VERSION} /opt/node \
+ && cp -r /opt/nvm/versions/node/${NODE_VERSION}/* /opt/node \
  && nvm deactivate \
  && nvm uninstall --lts
 
 FROM scratch AS base
 COPY --from=helper /opt/node /opt/node
 
-FROM base AS test
-RUN ["node", "--version"]
+FROM ubuntu:21.04 AS test
+COPY --from=helper /opt/node /opt/node
+RUN ["/opt/node/bin/node", "--version"]
 
 FROM base

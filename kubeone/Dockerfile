@@ -10,6 +10,6 @@ FROM scratch AS base
 COPY --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
-RUN ["kubeone", "--version"]
+RUN ["kubeone", "version"]
 
 FROM base
