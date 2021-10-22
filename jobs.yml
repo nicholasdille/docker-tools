@@ -1,0 +1,96 @@
+stages:
+- check
+- build
+- test
+- promote
+
+variables:
+  IMAGE_NAME: tools
+
+check:
+  stage: check
+  script:
+  - CONTINUE=true
+  - if test -z "${IMAGE_NAME}"; then CONTINUE=true; fi
+  - |
+    cat <<EOF
+    Variables:
+      REGISTRY_HOST is $(if test -z "${REGISTRY_HOST}"; then echo "not set"; else echo "${REGISTRY_HOST}"; fi)
+      REGISTRY_PATH is $(if test -z "${REGISTRY_PATH}"; then echo "not set"; else echo "${REGISTRY_PATH}"; fi)
+      REGISTRY_USER is $(if test -z "${REGISTRY_USER}"; then echo "not set"; else echo "${REGISTRY_USER}"; fi)
+      REGISTRY_PASS is $(if test -z "${REGISTRY_PASS}"; then echo "not set"; else echo "${REGISTRY_PASS}"; fi)
+      IMAGE_NAME is $(if test -z "${IMAGE_NAME}"; then echo "not set"; else echo "${IMAGE_NAME}"; fi); unable to continue
+      IMAGE_TAG is $(if test -z "${IMAGE_TAG}"; then echo "not set"; else echo "${IMAGE_TAG}"; fi)
+    EOF
+  - |
+    if test -n "${REGISTRY_HOST}"; then
+        REGISTRY_HOST="${REGISTRY_HOST}/"
+    fi
+  - |
+    if test -n "${REGISTRY_PATH}"; then
+        REGISTRY_PATH="${REGISTRY_PATH}/"
+    fi
+  - |
+    if test -n "${IMAGE_TAG}"; then
+        IMAGE_TAG="-${IMAGE_TAG}"
+    fi
+  - |
+    cat <<EOF
+    Will build  [\${REGISTRY_HOST}/][\${REGISTRY_PATH}/]\${IMAGE_NAME}:\${CI_PIPELINE_IID}[-\${IMAGE_TAG}]
+    Resolves to ${REGISTRY_HOST}${REGISTRY_PATH}${IMAGE_NAME}:${CI_PIPELINE_IID}${IMAGE_TAG}
+    EOF
+    ${CONTINUE} || false
+    
+.docker-login:
+  before_script:
+  - |
+    if test -n "${REGISTRY_HOST}" && test -n "${REGISTRY_USER}" && test -n "${REGISTRY_PASS}"; then
+        echo -n "${REGISTRY_PASS}" | \
+            docker login \
+                --username "${REGISTRY_USER}" \
+                --password-stdin "${REGISTRY_HOST}"
+    fi
+  after_script:
+  - |
+    if test -n "${REGISTRY_HOST}" && test -n "${REGISTRY_USER}" && test -n "${REGISTRY_PASS}"; then
+        docker logout "${REGISTRY_HOST}"
+    fi
+  
+.docker-build:
+  needs:
+  - check
+  services:
+  - docker:20.10.9-dind
+  extends: .docker-login
+  image: docker:20.10.9
+  variables:
+    FF_NETWORK_PER_BUILD: "true"
+    DOCKER_BUILDKIT: 1
+  script:
+  - |
+    if test -n "${REGISTRY_HOST}"; then
+        REGISTRY_HOST="${REGISTRY_HOST}/"
+    fi
+  - |
+    if test -n "${REGISTRY_PATH}"; then
+        REGISTRY_PATH="${REGISTRY_PATH}/"
+    fi
+  - |
+    if test -n "${IMAGE_TAG}"; then
+        IMAGE_TAG="-${IMAGE_TAG}"
+    fi
+  - |
+    docker build "${DIR}" \
+        --tag "${REGISTRY_HOST}${REGISTRY_PATH}${IMAGE_NAME}:${CI_PIPELINE_IID}${IMAGE_TAG}" \
+        --tag "${REGISTRY_HOST}${REGISTRY_PATH}${IMAGE_NAME}:dev${IMAGE_TAG}" \
+        --cache-from "${REGISTRY_HOST}${REGISTRY_PATH}${IMAGE_NAME}:dev${IMAGE_TAG}"
+  - |
+    docker build "${DIR}" \
+        --target test
+  - |
+    if test -n "${REGISTRY_HOST}" && test -n "${REGISTRY_USER}" && test -n "${REGISTRY_PASS}"; then
+        docker push \
+            "${REGISTRY_HOST}${REGISTRY_PATH}${IMAGE_NAME}:${CI_PIPELINE_IID}${IMAGE_TAG}"
+        docker push \
+            "${REGISTRY_HOST}${REGISTRY_PATH}${IMAGE_NAME}:dev${IMAGE_TAG}"
+    fi

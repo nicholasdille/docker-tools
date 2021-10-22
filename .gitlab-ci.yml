@@ -1,0 +1,23 @@
+stages:
+- prepare
+- build
+
+default:
+  image: ubuntu
+
+collect:
+  stage: prepare
+  script:
+  - bash generate.sh
+  artifacts:
+    expire_in: 1 day
+    paths:
+    - jobs.yml
+
+dynamic:
+  stage: build
+  trigger:
+    include:
+      - artifact: jobs.yml
+        job: collect
+    strategy: depend
