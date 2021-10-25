@@ -23,6 +23,7 @@ COPY --from=nicholasdille/tools:kustomize / /
 COPY --from=nicholasdille/tools:maven / /
 COPY --from=nicholasdille/tools:node / /
 COPY --from=nicholasdille/tools:oras / /
+COPY --from=nicholasdille/tools:python3.8 / /
 COPY --from=nicholasdille/tools:sops / /
 COPY --from=nicholasdille/tools:terraform / /
 COPY --from=nicholasdille/tools:trivy / /
