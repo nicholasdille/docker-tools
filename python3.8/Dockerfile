@@ -37,7 +37,7 @@ FROM scratch AS base
 COPY --from=helper /opt/python3.8 /opt/python3.8
 
 FROM ubuntu:21.04 AS test
-COPY --from=python38 /opt/python3.8 /opt/python3.8
+COPY --from=helper /opt/python3.8 /opt/python3.8
 RUN ["/opt/python3.8/bin/python3", "--version"]
 RUN ["/opt/python3.8/bin/pip3", "--version"]
 
