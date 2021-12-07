@@ -29,17 +29,17 @@
     },
     {
       "packageNames": [
-        "docker/cli",
-        "cloudflare/cloudflare-go",
-        "kubernetes/kubernetes",
-        "helm/helm",
         "aquasecurity/trivy",
+        "cloudflare/cloudflare-go",
         "deislabs/oras",
+        "docker/cli",
+        "helm/helm",
         "jfrog/jfrog-cli",
+        "kubernetes/kubernetes",
         "mayflower/docker-ls",
+        "profclems/glab",
         "superbrothers/ksort",
-        "zegl/kube-score",
-        "profclems/glab"
+        "zegl/kube-score"
       ],
       "extractVersion": "^v(?<version>.+)$"
     },
@@ -48,13 +48,17 @@
       "extractVersion": "^kustomize/v(?<version>.+)$"
     },
     {
+      "packageNames": [ "apache/maven" ],
+      "extractVersion": "^maven-(?<version>.+)$"
+    },
+    {
       "packageNames": [ "nicholasdille/tools" ],
       "pinDigests": false
     }
   ],
   "regexManagers": [
     {
-      "fileMatch": ["^Dockerfile$"],
+      "fileMatch": ["Dockerfile$"],
       "matchStrings": [
         "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s(ENV|ARG) .*?_VERSION=(?<currentValue>.*)\\s"
       ],
