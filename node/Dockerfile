@@ -14,7 +14,7 @@ RUN mkdir -p ${NVM_DIR} \
 FROM scratch AS base
 COPY --from=helper /opt/node /opt/node
 
-FROM ubuntu:21.04@sha256:26cd4ff32a9c031eaca3d6f589a7799f28b34a539e1bd81acbf1a6efeec4b1ce AS test
+FROM ubuntu:21.04@sha256:ba394fabd516b39ccf8597ec656a9ddd7d0a2688ed8cb373ca7ac9b6fe67848f AS test
 COPY --from=helper /opt/node /opt/node
 RUN ["/opt/node/bin/node", "--version"]
 
