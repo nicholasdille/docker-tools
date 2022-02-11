@@ -1,4 +1,4 @@
-FROM golang:1.17-alpine@sha256:4918412049183afe42f1ecaf8f5c2a88917c2eab153ce5ecf4bf2d55c1507b74 AS helper
+FROM golang:1.17-alpine@sha256:c23027af83ff27f663d7983750a9a08f442adb2e7563250787b23ab3b6750d9e AS helper
 ENV GO111MODULE=auto
 RUN apk add --update-cache --no-cache \
         git \
