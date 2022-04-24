@@ -8,7 +8,7 @@ RUN curl --silent --location https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERS
 FROM scratch AS base
 COPY --from=helper /opt/maven /opt/maven
 
-FROM alpine:3.14.3@sha256:635f0aa53d99017b38d1a0aa5b2082f7812b03e3cdb299103fe77b5c8a07f1d2 AS test
+FROM alpine:3.15.4@sha256:4edbd2beb5f78b1014028f4fbb99f3237d9561100b6881aabbf5acce2c4f9454 AS test
 RUN apk add --update-cache --no-cache \
         openjdk11-jre-headless
 COPY --from=helper /opt/maven /opt/maven
