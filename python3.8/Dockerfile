@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.3-labs
 
-FROM ubuntu:21.04@sha256:26cd4ff32a9c031eaca3d6f589a7799f28b34a539e1bd81acbf1a6efeec4b1ce as helper
+FROM ubuntu:22.04@sha256:2a7dffab37165e8b4f206f61cfd984f8bb279843b070217f6ad310c9c31c9c7c as helper
 ENV DEBIAN_FRONTEND=noninteractive
 RUN <<EOF
 ln -snf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
@@ -36,7 +36,7 @@ EOF
 FROM scratch AS base
 COPY --from=helper /opt/python3.8 /opt/python3.8
 
-FROM ubuntu:21.04@sha256:26cd4ff32a9c031eaca3d6f589a7799f28b34a539e1bd81acbf1a6efeec4b1ce AS test
+FROM ubuntu:22.04@sha256:2a7dffab37165e8b4f206f61cfd984f8bb279843b070217f6ad310c9c31c9c7c AS test
 COPY --from=helper /opt/python3.8 /opt/python3.8
 RUN ["/opt/python3.8/bin/python3", "--version"]
 RUN ["/opt/python3.8/bin/pip3", "--version"]
