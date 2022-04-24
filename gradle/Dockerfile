@@ -1,6 +1,6 @@
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-tags depName=gradle/gradle
-ARG GRADLE_VERSION=v6.9.2
+ARG GRADLE_VERSION=v7.4.2
 RUN curl --silent --location --fail --remote-name  https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
  && unzip gradle-${GRADLE_VERSION}-bin.zip -d /opt \
  && mv /opt/gradle-${GRADLE_VERSION} /opt/gradle \
