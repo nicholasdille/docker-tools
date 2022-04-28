@@ -21,7 +21,7 @@ group "default" {
         "maven",
         "node",
         "oras",
-        "python3.8",
+        "python38",
         "sops",
         "terraform",
         "trivy",
@@ -176,7 +176,7 @@ target "oras" {
     cache-from = [ "${repository}:oras" ]
 }
 
-target "python3.8" {
+target "python38" {
     inherits = [ "presets" ]
     context = "python3.8"
     tags = [ "${repository}:python3.8" ]
