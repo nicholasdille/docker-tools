@@ -39,7 +39,9 @@
         "mayflower/docker-ls",
         "profclems/glab",
         "superbrothers/ksort",
-        "zegl/kube-score"
+        "zegl/kube-score",
+        "gradle/gradle",
+        "mozilla/sops"
       ],
       "extractVersion": "^v(?<version>.+)$"
     },
