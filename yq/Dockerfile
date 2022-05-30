@@ -2,7 +2,7 @@
 
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-releases depName=mikefarah/yq
-ARG YQ_VERSION=v4.25.1
+ARG YQ_VERSION=v4.25.2
 RUN curl --location --output /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 \
  && chmod +x /usr/local/bin/yq
 
