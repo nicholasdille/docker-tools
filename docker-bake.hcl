@@ -175,13 +175,6 @@ target "oras" {
     cache-from = [ "${repository}:oras" ]
 }
 
-target "python38" {
-    inherits = [ "presets" ]
-    context = "python3.8"
-    tags = [ "${repository}:python3.8" ]
-    cache-from = [ "${repository}:python3.8" ]
-}
-
 target "sops" {
     inherits = [ "presets" ]
     context = "sops"
