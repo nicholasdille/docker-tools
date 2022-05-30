@@ -25,7 +25,6 @@ group "default" {
         "sops",
         "terraform",
         "trivy",
-        "yaml-patch",
         "yq"
     ]
 }
@@ -202,13 +201,6 @@ target "trivy" {
     context = "trivy"
     tags = [ "${repository}:trivy" ]
     cache-from = [ "${repository}:trivy" ]
-}
-
-target "yaml-patch" {
-    inherits = [ "presets" ]
-    context = "yaml-patch"
-    tags = [ "${repository}:yaml-patch" ]
-    cache-from = [ "${repository}:yaml-patch" ]
 }
 
 target "yq" {
