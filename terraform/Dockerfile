@@ -2,7 +2,7 @@
 
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-tags depName=hashicorp/terraform
-ARG TERRAFORM_VERSION=v1.1.9
+ARG TERRAFORM_VERSION=v1.2.1
 RUN curl -sLfO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION#v}/terraform_${TERRAFORM_VERSION#v}_linux_amd64.zip \
  && unzip terraform_${TERRAFORM_VERSION#v}_linux_amd64.zip -d /usr/local/bin/ \
  && rm terraform_${TERRAFORM_VERSION#v}_linux_amd64.zip
