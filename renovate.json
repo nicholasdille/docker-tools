@@ -52,6 +52,10 @@
       "extractVersion": "^maven-(?<version>.+)$"
     },
     {
+      "packageNames": [ "golang/go" ],
+      "extractVersion": "^go(?<version>.+)$"
+    },
+    {
       "packageNames": [ "nicholasdille/tools" ],
       "pinDigests": false
     }
