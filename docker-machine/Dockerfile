@@ -1,3 +1,5 @@
+#syntax=docker/dockerfile:1.4.1
+
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-releases depName=docker/machine
 ARG DOCKER_MACHINE_VERSION=v0.16.2
@@ -5,7 +7,7 @@ RUN curl --silent --location --output /usr/local/bin/docker-machine https://gith
  && chmod +x /usr/local/bin/docker-machine
 
 FROM scratch AS base
-COPY --from=helper /usr/local/bin/* /usr/local/bin/
+COPY --link --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
 RUN ["docker-machine", "version"]

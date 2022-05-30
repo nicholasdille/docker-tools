@@ -1,3 +1,5 @@
+#syntax=docker/dockerfile:1.4.1
+
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-releases depName=mikefarah/yq
 ARG YQ_VERSION=v4.25.1
@@ -5,7 +7,7 @@ RUN curl --location --output /usr/local/bin/yq https://github.com/mikefarah/yq/r
  && chmod +x /usr/local/bin/yq
 
 FROM scratch AS base
-COPY --from=helper /usr/local/bin/* /usr/local/bin/
+COPY --link --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
 RUN ["yq", "--version"]

@@ -1,3 +1,5 @@
+#syntax=docker/dockerfile:1.4.1
+
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-releases depName=deislabs/oras
 ARG ORAS_VERSION=0.12.0
@@ -5,7 +7,7 @@ RUN curl --location --fail https://github.com/deislabs/oras/releases/download/v$
         tar -xzC /usr/local/bin oras
 
 FROM scratch AS base
-COPY --from=helper /usr/local/bin/* /usr/local/bin/
+COPY --link --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
 RUN ["oras", "version"]

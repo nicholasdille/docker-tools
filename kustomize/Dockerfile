@@ -1,3 +1,5 @@
+#syntax=docker/dockerfile:1.4.1
+
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
 ARG KUSTOMIZE_VERSION=4.5.4
@@ -5,7 +7,7 @@ RUN curl --location https://github.com/kubernetes-sigs/kustomize/releases/downlo
         tar -xzC /usr/local/bin kustomize
 
 FROM scratch AS base
-COPY --from=helper /usr/local/bin/* /usr/local/bin/
+COPY --link --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
 RUN ["kustomize", "version"]

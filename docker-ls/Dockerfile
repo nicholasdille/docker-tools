@@ -1,3 +1,5 @@
+#syntax=docker/dockerfile:1.4.1
+
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-releases depName=mayflower/docker-ls
 ARG DOCKER_LS_VERSION=0.5.1
@@ -6,7 +8,7 @@ RUN curl --location --remote-name https://github.com/mayflower/docker-ls/release
  && mv docker-ls docker-rm /usr/local/bin/
 
 FROM scratch AS base
-COPY --from=helper /usr/local/bin/* /usr/local/bin/
+COPY --link --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
 RUN ["docker-ls", "version"]

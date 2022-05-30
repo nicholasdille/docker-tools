@@ -1,3 +1,5 @@
+#syntax=docker/dockerfile:1.4.1
+
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-tags depName=gradle/gradle
 ARG GRADLE_VERSION=v7.4.2
@@ -7,12 +9,12 @@ RUN curl --silent --location --fail --remote-name  https://services.gradle.org/d
  && rm -f gradle-${GRADLE_VERSION}-bin.zip
 
 FROM scratch AS base
-COPY --from=helper /opt/gradle /opt/gradle
+COPY --link --from=helper /opt/gradle /opt/gradle
 
 FROM alpine:3.15.4@sha256:4edbd2beb5f78b1014028f4fbb99f3237d9561100b6881aabbf5acce2c4f9454 AS test
 RUN apk add --update-cache --no-cache \
         openjdk11-jre-headless
-COPY --from=helper /opt/gradle /opt/gradle
+COPY --link --from=helper /opt/gradle /opt/gradle
 RUN ["/opt/gradle/bin/gradle", "--version"]
 
 FROM base

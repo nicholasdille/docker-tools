@@ -1,3 +1,5 @@
+#syntax=docker/dockerfile:1.4.1
+
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-releases depName=superbrothers/ksort
 ARG KSORT_VERSION=0.4.3
@@ -7,7 +9,7 @@ RUN curl --location --remote-name https://github.com/superbrothers/ksort/release
  && rm ksort-linux-amd64.zip
 
 FROM scratch AS base
-COPY --from=helper /usr/local/bin/* /usr/local/bin/
+COPY --link --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
 RUN ["ksort", "--version"]

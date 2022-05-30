@@ -1,3 +1,5 @@
+#syntax=docker/dockerfile:1.4.1
+
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-releases depName=zegl/kube-score
 ARG KUBE_SCORE_VERSION=1.14.0
@@ -5,7 +7,7 @@ RUN curl --location https://github.com/zegl/kube-score/releases/download/v${KUBE
         tar -xzC /usr/local/bin/
 
 FROM scratch AS base
-COPY --from=helper /usr/local/bin/* /usr/local/bin/
+COPY --link --from=helper /usr/local/bin/* /usr/local/bin/
 
 FROM base AS test
 RUN ["kube-score", "version"]

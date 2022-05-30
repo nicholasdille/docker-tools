@@ -34,10 +34,10 @@ make install
 EOF
 
 FROM scratch AS base
-COPY --from=helper /opt/python3.8 /opt/python3.8
+COPY --link --from=helper /opt/python3.8 /opt/python3.8
 
 FROM ubuntu:22.04@sha256:26c68657ccce2cb0a31b330cb0be2b5e108d467f641c62e13ab40cbec258c68d AS test
-COPY --from=helper /opt/python3.8 /opt/python3.8
+COPY --link --from=helper /opt/python3.8 /opt/python3.8
 RUN ["/opt/python3.8/bin/python3", "--version"]
 RUN ["/opt/python3.8/bin/pip3", "--version"]
 
