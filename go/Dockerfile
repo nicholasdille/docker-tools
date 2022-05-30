@@ -2,7 +2,7 @@
 
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-tags depName=golang/go
-ARG GO_VERSION=1.17.1
+ARG GO_VERSION=1.17.10
 RUN curl --silent https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz | \
         tar -C /opt -xz
 
