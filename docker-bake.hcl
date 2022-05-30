@@ -21,7 +21,6 @@ group "default" {
         "maven",
         "node",
         "oras",
-        "python38",
         "sops",
         "terraform",
         "trivy",
