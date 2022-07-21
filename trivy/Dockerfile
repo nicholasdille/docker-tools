@@ -2,7 +2,7 @@
 
 FROM nicholasdille/tools:helpers AS helper
 # renovate: datasource=github-releases depName=aquasecurity/trivy
-ARG TRIVY_VERSION=0.30.0
+ARG TRIVY_VERSION=0.30.2
 RUN curl --location --fail https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz | \
         tar -xzC /usr/local/bin/ trivy
 
