@@ -1,33 +1,56 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:base",
+    
+    ":label(type/renovate)",
+
+    ":docker",
+    "docker:enableMajor",
+    "docker:pinDigests",
+
+    ":disableRateLimiting",
+    ":ignoreUnstable",
+    ":pinVersions",
+    ":separateMajorReleases",
+    ":automergePr",
+    ":automergeRequireAllStatusChecks",
+    ":automergeDigest",
+    ":automergePatch",
+    ":semanticCommits",
+    
+    ":enableVulnerabilityAlerts",
+    ":enableVulnerabilityAlertsWithLabel(security)"
   ],
-  "useBaseBranchConfig": "merge",
-  "docker": {
-    "pinDigests": true
-  },
-  "automergeType": "pr",
-  "platformAutomerge": true,
-  "ignoreTests": false,
+
   "rebaseWhen": "conflicted",
+  "platformAutomerge": true,
   "rebaseLabel": "renovate/rebase",
   "stopUpdatingLabel": "renovate/stop-updating",
-  "recreateClosed": false,
-  "prHourlyLimit": 0,
-  "prConcurrentLimit": 0,
-  "major": {
-    "labels": ["renovate", "major"]
-  },
-  "minor": {
-    "labels": ["renovate", "minor"]
-  },
-  "patch": {
-    "labels": ["renovate", "patch"]
-  },
-  "pin": {
-    "labels": ["renovate", "pin"]
-  },
+
+  "major":  { "labels": ["bump/major"] },
+  "minor":  { "labels": ["bump/minor"] },
+  "patch":  { "labels": ["bump/patch"] },
+  "pin":    { "labels": ["bump/pin"] },
+  "digest": { "labels": ["bump/digest"] },
+
+  "regexManagers": [
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\n(ENV|ARG) .*?_VERSION=(?<currentValue>.*)\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "fileMatch": ["(^|/|\\.)Dockerfile[^/]*$"],
+      "matchStrings": [
+        "#syntax=(?<depName>.*?):(?<currentValue>.*?)\\n"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ],
+
   "packageRules": [
     {
       "updateTypes": ["major", "minor", "patch", "pin", "digest"],
@@ -66,15 +89,6 @@
     {
       "packageNames": [ "nicholasdille/tools" ],
       "pinDigests": false
-    }
-  ],
-  "regexManagers": [
-    {
-      "fileMatch": ["Dockerfile$"],
-      "matchStrings": [
-        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s(ENV|ARG) .*?_VERSION=(?<currentValue>.*)\\s"
-      ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ]
 }
