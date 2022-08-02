@@ -10,7 +10,7 @@ RUN curl -sLfO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION#v}/t
 FROM scratch AS base
 COPY --link --from=helper /usr/local/bin/* /usr/local/bin/
 
-FROM ubuntu:22.04@sha256:26c68657ccce2cb0a31b330cb0be2b5e108d467f641c62e13ab40cbec258c68d AS test
+FROM ubuntu:22.04@sha256:34fea4f31bf187bc915536831fd0afc9d214755bf700b5cdb1336c82516d154e AS test
 COPY --from=helper /usr/local/bin/* /usr/local/bin/
 RUN ["terraform", "version"]
 
