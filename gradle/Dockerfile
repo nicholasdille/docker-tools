@@ -11,7 +11,7 @@ RUN curl --silent --location --fail --remote-name https://services.gradle.org/di
 FROM scratch AS base
 COPY --link --from=helper /opt/gradle /opt/gradle
 
-FROM alpine:3.16.0@sha256:686d8c9dfa6f3ccfc8230bc3178d23f84eeaf7e457f36f271ab1acc53015037c AS test
+FROM alpine:3.16.2@sha256:bc41182d7ef5ffc53a40b044e725193bc10142a1243f395ee852a8d9730fc2ad AS test
 RUN apk add --update-cache --no-cache \
         openjdk11-jre-headless
 COPY --link --from=helper /opt/gradle /opt/gradle
