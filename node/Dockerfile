@@ -1,4 +1,4 @@
-#syntax=docker/dockerfile:1.4.1
+#syntax=docker/dockerfile:1.4.3
 
 FROM nicholasdille/tools:helpers AS helper
 ARG NVM_VERSION=0.39.1
