@@ -39,9 +39,9 @@ check:
     EOF
     ${CONTINUE} || false
 
-install:
+prepare:
   stage: check
-  script:
+  before_script:
   - |
     curl "https://github.com/nicholasdille/docker-setup/raw/main/docker-setup" \
         --silent \
@@ -49,11 +49,6 @@ install:
         --fail \
         --output /usr/local/bin/docker-setup
   - chmod +x /usr/local/bin/docker-setup
-
-prepare:
-  stage: check
-  needs:
-  - install
   script:
   - docker-setup --tools=docker,docker-compose,flarectl,glab,go,gradle,helm,jfrog,kubectl,kustomize,maven,nodejs,oras,sops,terraform,trivy,yq generate >Dockerfile
   artifacts:
