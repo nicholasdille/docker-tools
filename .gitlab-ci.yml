@@ -50,8 +50,8 @@ prepare:
         --output /usr/local/bin/docker-setup
   - chmod +x /usr/local/bin/docker-setup
   script:
-  - whoami
-  - sudo -E docker-setup --tools=docker,docker-compose,flarectl,glab,go,gradle,helm,jfrog,kubectl,kustomize,maven,nodejs,oras,sops,terraform,trivy,yq generate >Dockerfile
+  - ls -al /var/lib/ /var/cache/
+  - docker-setup --tools=docker,docker-compose,flarectl,glab,go,gradle,helm,jfrog,kubectl,kustomize,maven,nodejs,oras,sops,terraform,trivy,yq generate >Dockerfile
   artifacts:
     paths:
     - Dockerfile
