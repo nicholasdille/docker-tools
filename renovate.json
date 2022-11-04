@@ -55,40 +55,6 @@
     {
       "updateTypes": ["major", "minor", "patch", "pin", "digest"],
       "automerge": true
-    },
-    {
-      "packageNames": [
-        "aquasecurity/trivy",
-        "cloudflare/cloudflare-go",
-        "deislabs/oras",
-        "docker/cli",
-        "helm/helm",
-        "jfrog/jfrog-cli",
-        "kubernetes/kubernetes",
-        "mayflower/docker-ls",
-        "profclems/glab",
-        "superbrothers/ksort",
-        "zegl/kube-score",
-        "gradle/gradle",
-        "mozilla/sops"
-      ],
-      "extractVersion": "^v(?<version>.+)$"
-    },
-    {
-      "packageNames": [ "kubernetes-sigs/kustomize" ],
-      "extractVersion": "^kustomize/v(?<version>.+)$"
-    },
-    {
-      "packageNames": [ "apache/maven" ],
-      "extractVersion": "^maven-(?<version>.+)$"
-    },
-    {
-      "packageNames": [ "golang/go" ],
-      "extractVersion": "^go(?<version>.+)$"
-    },
-    {
-      "packageNames": [ "nicholasdille/tools" ],
-      "pinDigests": false
     }
   ]
 }
