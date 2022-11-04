@@ -46,7 +46,7 @@ install:
     curl "https://github.com/nicholasdille/docker-setup/raw/main/docker-setup" \
         --silent \
         --location \
-        --fail
+        --fail \
         --output /usr/local/bin/docker-setup
   - chmod +x /usr/local/bin/docker-setup
 
