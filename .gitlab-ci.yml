@@ -75,9 +75,9 @@ prepare:
   needs:
   - check
   services:
-  - docker:20.10.21-dind
+  - docker:25.0.5-dind@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb
   extends: .docker-login
-  image: docker:20.10.21
+  image: docker:25.0.5@sha256:eb37f58646a901dc7727cf448cae36daaefaba79de33b5058dab79aa4c04aefb
   variables:
     FF_NETWORK_PER_BUILD: "true"
     DOCKER_BUILDKIT: 1
